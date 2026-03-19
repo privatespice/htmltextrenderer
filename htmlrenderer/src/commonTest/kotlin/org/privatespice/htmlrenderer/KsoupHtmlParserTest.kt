@@ -1,4 +1,4 @@
-package org.privatespice.htmlrenderer.parser
+package org.privatespice.htmlrenderer
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -15,6 +15,7 @@ import org.privatespice.htmlrenderer.node.HtmlSpanNode
 import org.privatespice.htmlrenderer.node.HtmlStrongNode
 import org.privatespice.htmlrenderer.node.HtmlTextAlign
 import org.privatespice.htmlrenderer.node.HtmlTextNode
+import org.privatespice.htmlrenderer.parser.KsoupHtmlParser
 
 class KsoupHtmlParserTest {
 

@@ -1,4 +1,4 @@
-package org.privatespice.htmlrenderer.parser
+package org.privatespice.htmlrenderer
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -16,6 +16,8 @@ import org.privatespice.htmlrenderer.node.HtmlSubscriptNode
 import org.privatespice.htmlrenderer.node.HtmlSuperscriptNode
 import org.privatespice.htmlrenderer.node.HtmlTextNode
 import org.privatespice.htmlrenderer.node.HtmlUnderlineNode
+import org.privatespice.htmlrenderer.parser.KsoupHtmlParser
+import org.privatespice.htmlrenderer.parser.normalizeWhitespace
 
 class HtmlWhitespaceNormalizerTest {
 

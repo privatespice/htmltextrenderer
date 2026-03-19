@@ -1,4 +1,4 @@
-package org.privatespice.htmlrenderer.parser
+package org.privatespice.htmlrenderer
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
