@@ -1,4 +1,4 @@
-rootProject.name = "htmlrenderer"
+rootProject.name = "htmlrenderer-lib"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
