@@ -29,7 +29,25 @@ fun Article(html: String) {
 }
 ```
 
-You can also customize typography, spacing, and per-node renderers (see `HtmlTextRendererExample.kt` and `HtmlTextRenderer(...)`).
+You can also customize typography, spacing, and per-node renderers (see `HtmlRendererExample.kt` and `HtmlTextRenderer(...)`).
+
+## Installation (JitPack)
+
+Add JitPack to your repositories:
+
+```kotlin
+repositories {
+    maven("https://jitpack.io")
+}
+```
+
+Use only the text renderer module artifact:
+
+```kotlin
+implementation("com.github.privatespice.htmlrenderer:htmlrenderer:<tag>")
+```
+
+Replace `<tag>` with a Git tag or commit hash.
 
 ## Supported tags
 
@@ -69,4 +87,22 @@ You can also customize typography, spacing, and per-node renderers (see `HtmlTex
 ## Credits
 
 - HTML parsing is powered by [`Ksoup`](https://github.com/MohamedRejeb/Ksoup).
+
+## License
+
+```text
+Copyright 2026 Mitchell Wit
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
 

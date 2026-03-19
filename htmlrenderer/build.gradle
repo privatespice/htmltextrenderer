@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    id 'maven-publish'
 }
 
 kotlin {
@@ -37,5 +38,30 @@ android {
 
     defaultConfig {
         minSdk = 24
+    }
+}
+
+publishing {
+    publications.withType(MavenPublication).configureEach {
+        pom {
+            name = "HtmlTextRenderer"
+            description = "Compose Multiplatform HTML text renderer"
+            url = "https://github.com/privatespice/htmlrenderer"
+            licenses {
+                license {
+                    name = "Apache License, Version 2.0"
+                    url = "https://www.apache.org/licenses/LICENSE-2.0"
+                }
+            }
+            developers {
+                developer {
+                    id = "privatespice"
+                    name = "privatespice"
+                }
+            }
+            scm {
+                url = "https://github.com/privatespice/htmlrenderer"
+            }
+        }
     }
 }
