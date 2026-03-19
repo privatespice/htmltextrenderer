@@ -22,8 +22,6 @@ import org.privatespice.htmlrenderer.node.HtmlInlineNode
 import org.privatespice.htmlrenderer.node.HtmlListNode
 import org.privatespice.htmlrenderer.node.HtmlParagraphNode
 import org.privatespice.htmlrenderer.node.HtmlTextAlign
-import org.privatespice.htmlrenderer.style.HtmlSpacing
-import org.privatespice.htmlrenderer.style.HtmlTypography
 
 data class HtmlRenderers(
     // Block renderers

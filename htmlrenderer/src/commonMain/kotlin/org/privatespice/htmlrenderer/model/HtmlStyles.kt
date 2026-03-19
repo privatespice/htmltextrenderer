@@ -1,4 +1,4 @@
-package org.privatespice.htmlrenderer.style
+package org.privatespice.htmlrenderer.model
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable

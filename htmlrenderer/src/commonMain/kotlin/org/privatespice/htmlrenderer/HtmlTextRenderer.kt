@@ -30,11 +30,12 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import org.privatespice.htmlrenderer.extension.normalizeWhitespace
 import org.privatespice.htmlrenderer.model.HtmlRenderContext
 import org.privatespice.htmlrenderer.model.HtmlRenderers
-import org.privatespice.htmlrenderer.style.HtmlSpacing
-import org.privatespice.htmlrenderer.style.HtmlStyleDefaults
-import org.privatespice.htmlrenderer.style.HtmlTypography
+import org.privatespice.htmlrenderer.model.HtmlSpacing
+import org.privatespice.htmlrenderer.model.HtmlStyleDefaults
+import org.privatespice.htmlrenderer.model.HtmlTypography
 import org.privatespice.htmlrenderer.node.DefaultSupportedTags
 import org.privatespice.htmlrenderer.node.HtmlBlockNode
 import org.privatespice.htmlrenderer.node.HtmlBlockQuoteNode
@@ -57,7 +58,6 @@ import org.privatespice.htmlrenderer.node.HtmlTag
 import org.privatespice.htmlrenderer.node.HtmlTextNode
 import org.privatespice.htmlrenderer.node.HtmlUnderlineNode
 import org.privatespice.htmlrenderer.parser.KsoupHtmlParser
-import org.privatespice.htmlrenderer.parser.normalizeWhitespace
 
 @Composable
 fun HtmlTextRenderer(

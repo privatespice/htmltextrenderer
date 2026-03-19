@@ -66,3 +66,7 @@ You can also customize typography, spacing, and per-node renderers (see `HtmlTex
 - You can limit allowed tags with the `supportedTags` parameter.
 - Default supported tags are defined in `HtmlNode.kt` as `DefaultSupportedTags`.
 
+## Credits
+
+- HTML parsing is powered by [`Ksoup`](https://github.com/MohamedRejeb/Ksoup).
+

@@ -1,4 +1,4 @@
-package org.privatespice.htmlrenderer.parser
+package org.privatespice.htmlrenderer.extension
 
 import org.privatespice.htmlrenderer.node.HtmlBlockNode
 import org.privatespice.htmlrenderer.node.HtmlBlockQuoteNode

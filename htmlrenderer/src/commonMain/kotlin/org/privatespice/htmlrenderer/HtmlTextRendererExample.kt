@@ -5,7 +5,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import org.privatespice.htmlrenderer.model.HtmlRenderers
-import org.privatespice.htmlrenderer.style.HtmlStyleDefaults
+import org.privatespice.htmlrenderer.model.HtmlStyleDefaults
 
 @Composable
 fun HtmlTextRendererDefaultExample(html: String) {
