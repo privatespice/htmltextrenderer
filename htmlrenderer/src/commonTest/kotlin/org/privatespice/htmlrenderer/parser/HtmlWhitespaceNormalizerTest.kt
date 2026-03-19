@@ -48,6 +48,16 @@ class HtmlWhitespaceNormalizerTest {
         assertEquals("Hello world", toPlainText(itemInline))
     }
 
+    @Test
+    fun keepsSpacingAcrossInlineBoundaryWhenNbspIsUsed() {
+        val html = "<p><strong>We have a bold text&nbsp;</strong>and a <em>emphasis</em></p>"
+
+        val document = parser.parse(html).normalizeWhitespace()
+        val paragraph = document.children.first() as HtmlParagraphNode
+
+        assertEquals("We have a bold text and a emphasis", toPlainText(paragraph.children))
+    }
+
     private fun toPlainText(nodes: List<HtmlInlineNode>): String = buildString {
         nodes.forEach { node -> appendInline(node) }
     }

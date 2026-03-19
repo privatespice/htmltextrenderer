@@ -2,6 +2,7 @@ package org.privatespice.htmlrenderer.parser
 
 private val whitespaceRegex = Regex("\\s+")
 private val repeatedSpacesRegex = Regex(" {2,}")
+private const val nonBreakingSpaceChar: Char = '\u00A0'
 
 internal fun HtmlDocument.normalizeWhitespace(): HtmlDocument =
     copy(children = children.map { it.normalizeBlockNode() })
@@ -68,7 +69,6 @@ private fun normalizeInlineSiblings(
     if (normalizedNodes.isEmpty()) return emptyList()
 
     val result = mutableListOf<HtmlInlineNode>()
-    var pendingSpace = false
 
     normalizedNodes.forEachIndexed { index, node ->
         if (node is HtmlTextNode) {
@@ -83,8 +83,8 @@ private fun normalizeInlineSiblings(
                     if (hasTextualBefore && hasTextualAfter) " " else ""
                 }
                 else -> {
-                    val leading = collapsed.startsWith(" ") && hasTextualBefore
-                    val trailing = collapsed.endsWith(" ") && hasTextualAfter
+                    val leading = collapsed.startsWith(" ") && (hasTextualBefore || node.text.startsWith(nonBreakingSpaceChar))
+                    val trailing = collapsed.endsWith(" ") && (hasTextualAfter || node.text.endsWith(nonBreakingSpaceChar))
                     val core = collapsed.trim()
                     buildString {
                         if (leading) append(' ')
@@ -95,27 +95,11 @@ private fun normalizeInlineSiblings(
             }
 
             if (nextText.isNotEmpty()) {
-                appendTextNode(result, if (pendingSpace) " $nextText" else nextText)
-                pendingSpace = false
+                appendTextNode(result, nextText)
             }
         } else {
-            if (pendingSpace && startsWithTextualContent(node)) {
-                appendTextNode(result, " ")
-                pendingSpace = false
-            }
-
             result.add(node)
 
-            if (node is HtmlLineBreakNode) {
-                pendingSpace = false
-            } else if (endsWithSpace(node)) {
-                pendingSpace = true
-            }
-        }
-
-        val lastText = (result.lastOrNull() as? HtmlTextNode)?.text
-        if (lastText != null) {
-            pendingSpace = lastText.endsWith(" ")
         }
     }
 
@@ -208,35 +192,10 @@ private fun hasTextualContent(node: HtmlInlineNode): Boolean = when (node) {
     is HtmlSpanNode -> node.children.any(::hasTextualContent)
 }
 
-private fun startsWithTextualContent(node: HtmlInlineNode): Boolean = when (node) {
-    is HtmlTextNode -> node.text.trimStart().isNotEmpty()
-    HtmlLineBreakNode -> false
-    is HtmlStrongNode -> node.children.firstOrNull()?.let(::startsWithTextualContent) == true
-    is HtmlEmphasisNode -> node.children.firstOrNull()?.let(::startsWithTextualContent) == true
-    is HtmlUnderlineNode -> node.children.firstOrNull()?.let(::startsWithTextualContent) == true
-    is HtmlStrikeThroughNode -> node.children.firstOrNull()?.let(::startsWithTextualContent) == true
-    is HtmlSubscriptNode -> node.children.firstOrNull()?.let(::startsWithTextualContent) == true
-    is HtmlSuperscriptNode -> node.children.firstOrNull()?.let(::startsWithTextualContent) == true
-    is HtmlCodeNode -> node.children.firstOrNull()?.let(::startsWithTextualContent) == true
-    is HtmlLinkNode -> node.children.firstOrNull()?.let(::startsWithTextualContent) == true
-    is HtmlSpanNode -> node.children.firstOrNull()?.let(::startsWithTextualContent) == true
-}
-
-private fun endsWithSpace(node: HtmlInlineNode): Boolean = when (node) {
-    is HtmlTextNode -> node.text.endsWith(' ')
-    HtmlLineBreakNode -> false
-    is HtmlStrongNode -> node.children.lastOrNull()?.let(::endsWithSpace) == true
-    is HtmlEmphasisNode -> node.children.lastOrNull()?.let(::endsWithSpace) == true
-    is HtmlUnderlineNode -> node.children.lastOrNull()?.let(::endsWithSpace) == true
-    is HtmlStrikeThroughNode -> node.children.lastOrNull()?.let(::endsWithSpace) == true
-    is HtmlSubscriptNode -> node.children.lastOrNull()?.let(::endsWithSpace) == true
-    is HtmlSuperscriptNode -> node.children.lastOrNull()?.let(::endsWithSpace) == true
-    is HtmlCodeNode -> node.children.lastOrNull()?.let(::endsWithSpace) == true
-    is HtmlLinkNode -> node.children.lastOrNull()?.let(::endsWithSpace) == true
-    is HtmlSpanNode -> node.children.lastOrNull()?.let(::endsWithSpace) == true
-}
-
-private fun collapseWhitespace(text: String): String = text.replace(whitespaceRegex, " ")
+private fun collapseWhitespace(text: String): String =
+    text
+        .replace(nonBreakingSpaceChar, ' ')
+        .replace(whitespaceRegex, " ")
 
 private fun HtmlStrongNode.ifHasChildren(): HtmlStrongNode? = takeIf { children.isNotEmpty() }
 private fun HtmlEmphasisNode.ifHasChildren(): HtmlEmphasisNode? = takeIf { children.isNotEmpty() }
