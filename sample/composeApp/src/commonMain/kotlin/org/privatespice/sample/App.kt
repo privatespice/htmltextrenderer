@@ -15,7 +15,6 @@ import org.privatespice.htmlrenderer.HtmlTextRenderer
 @Preview
 fun App() {
     MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
         Column(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.primaryContainer)
@@ -68,7 +67,7 @@ fun App() {
                         Final paragraph with inline <code>val example = true</code>
                         and some <span>extra span text</span>.
                     </p>
-                """.trimIndent().replace(Regex("\\s+"), " ")
+                """.trimIndent()
             )
         }
     }
