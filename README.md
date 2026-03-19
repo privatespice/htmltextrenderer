@@ -1,36 +1,75 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+## HtmlRenderer (Kotlin Multiplatform)
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-    - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-    - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-      For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-      the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-      Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-      folder is the appropriate location.
+`HtmlRenderer` is a lightweight Kotlin Multiplatform library for rendering a safe subset of HTML in Compose UI (Android + iOS).
 
-* [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+It parses HTML into typed nodes, normalizes whitespace to browser-like behavior, and renders the result using Compose text and layout primitives.
 
-### Build and Run Android Application
+### What this framework does
 
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
+- Renders common HTML content in Compose with styled text blocks
+- Supports links, headings, paragraphs, lists, and common inline formatting
+- Preserves `<br>` as a real line break
+- Normalizes whitespace to avoid:
+  - extra spaces from indentation/newlines
+  - merged words across inline boundaries
+  - duplicate spaces
 
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
+## Quick example
 
-### Build and Run iOS Application
+```kotlin
+@Composable
+fun Article(html: String) {
+    HtmlRenderer(
+        html = html,
+        onLinkClicked = { url ->
+            // Handle URL click
+            println("Clicked: $url")
+        },
+    )
+}
+```
 
-To build and run the development version of the iOS app, use the run configuration from the run widget
-in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and run it from there.
+You can also customize typography, spacing, and per-node renderers (see `HtmlRendererExample.kt`).
 
----
+## Supported tags
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+### Block tags
+
+- `h1`
+- `h2`
+- `h3`
+- `h4`
+- `p`
+- `blockquote`
+- `ul`
+- `ol`
+- `li`
+
+### Inline tags
+
+- `span`
+- `a`
+- `strong`
+- `b`
+- `i`
+- `em`
+- `s`
+- `u`
+- `sub`
+- `sup`
+- `code`
+- `br`
+
+## Notes
+
+- Unsupported tags are ignored/unwrapped so inner text can still be rendered.
+- You can limit allowed tags with the `supportedTags` parameter.
+- Default supported tags are defined in `HtmlNode.kt` as `DefaultSupportedTags`.
+
+## Build
+
+From project root:
+
+```bash
+./gradlew :htmlrenderer:check
+```
