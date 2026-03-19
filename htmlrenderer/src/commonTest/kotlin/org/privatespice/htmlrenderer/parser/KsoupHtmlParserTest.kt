@@ -6,6 +6,15 @@ import kotlin.test.assertFalse
 import kotlin.test.assertIs
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
+import org.privatespice.htmlrenderer.node.HtmlBlockTag
+import org.privatespice.htmlrenderer.node.HtmlInlineTag
+import org.privatespice.htmlrenderer.node.HtmlLineBreakNode
+import org.privatespice.htmlrenderer.node.HtmlLinkNode
+import org.privatespice.htmlrenderer.node.HtmlParagraphNode
+import org.privatespice.htmlrenderer.node.HtmlSpanNode
+import org.privatespice.htmlrenderer.node.HtmlStrongNode
+import org.privatespice.htmlrenderer.node.HtmlTextAlign
+import org.privatespice.htmlrenderer.node.HtmlTextNode
 
 class KsoupHtmlParserTest {
 

@@ -9,7 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import org.privatespice.htmlrenderer.HtmlRenderer
+import org.privatespice.htmlrenderer.HtmlTextRenderer
 
 @Composable
 @Preview
@@ -23,7 +23,7 @@ fun App() {
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            HtmlRenderer(
+            HtmlTextRenderer(
                 html = """
                     <h1>Lorem Ipsum Title</h1>
                     <p>

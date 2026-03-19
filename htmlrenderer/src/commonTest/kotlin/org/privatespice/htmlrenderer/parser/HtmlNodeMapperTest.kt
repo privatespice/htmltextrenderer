@@ -3,6 +3,17 @@ package org.privatespice.htmlrenderer.parser
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
+import org.privatespice.htmlrenderer.node.HtmlBlockTag
+import org.privatespice.htmlrenderer.node.HtmlHeadingNode
+import org.privatespice.htmlrenderer.node.HtmlInlineTag
+import org.privatespice.htmlrenderer.node.HtmlListNode
+import org.privatespice.htmlrenderer.node.HtmlNodeMapper
+import org.privatespice.htmlrenderer.node.HtmlParagraphNode
+import org.privatespice.htmlrenderer.node.HtmlRawElementNode
+import org.privatespice.htmlrenderer.node.HtmlRawTextNode
+import org.privatespice.htmlrenderer.node.HtmlStrongNode
+import org.privatespice.htmlrenderer.node.HtmlTextAlign
+import org.privatespice.htmlrenderer.node.HtmlTextNode
 
 class HtmlNodeMapperTest {
 

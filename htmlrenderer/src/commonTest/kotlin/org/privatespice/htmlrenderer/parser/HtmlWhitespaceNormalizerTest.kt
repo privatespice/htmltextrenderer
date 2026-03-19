@@ -2,6 +2,20 @@ package org.privatespice.htmlrenderer.parser
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.privatespice.htmlrenderer.node.HtmlCodeNode
+import org.privatespice.htmlrenderer.node.HtmlEmphasisNode
+import org.privatespice.htmlrenderer.node.HtmlInlineNode
+import org.privatespice.htmlrenderer.node.HtmlLineBreakNode
+import org.privatespice.htmlrenderer.node.HtmlLinkNode
+import org.privatespice.htmlrenderer.node.HtmlListNode
+import org.privatespice.htmlrenderer.node.HtmlParagraphNode
+import org.privatespice.htmlrenderer.node.HtmlSpanNode
+import org.privatespice.htmlrenderer.node.HtmlStrikeThroughNode
+import org.privatespice.htmlrenderer.node.HtmlStrongNode
+import org.privatespice.htmlrenderer.node.HtmlSubscriptNode
+import org.privatespice.htmlrenderer.node.HtmlSuperscriptNode
+import org.privatespice.htmlrenderer.node.HtmlTextNode
+import org.privatespice.htmlrenderer.node.HtmlUnderlineNode
 
 class HtmlWhitespaceNormalizerTest {
 

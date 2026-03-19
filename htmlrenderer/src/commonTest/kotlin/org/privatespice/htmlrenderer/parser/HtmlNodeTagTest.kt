@@ -4,6 +4,10 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
+import org.privatespice.htmlrenderer.node.DefaultSupportedTags
+import org.privatespice.htmlrenderer.node.HtmlBlockTag
+import org.privatespice.htmlrenderer.node.HtmlInlineTag
+import org.privatespice.htmlrenderer.node.htmlTagFromName
 
 class HtmlNodeTagTest {
 

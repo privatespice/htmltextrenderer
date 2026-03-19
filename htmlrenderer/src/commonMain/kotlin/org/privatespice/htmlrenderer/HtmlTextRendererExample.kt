@@ -5,10 +5,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import org.privatespice.htmlrenderer.model.HtmlRenderers
-import org.privatespice.htmlrenderer.model.HtmlStyleDefaults
+import org.privatespice.htmlrenderer.style.HtmlStyleDefaults
 
 @Composable
-fun HtmlRendererDefaultExample(html: String) {
+fun HtmlTextRendererDefaultExample(html: String) {
     val typography = HtmlStyleDefaults.typography().copy(
         paragraph = MaterialTheme.typography.bodySmall,
     )
@@ -17,7 +17,7 @@ fun HtmlRendererDefaultExample(html: String) {
         listItem = 8.dp,
     )
 
-    HtmlRenderer(
+    HtmlTextRenderer(
         html = html,
         typography = typography,
         spacing = spacing,
@@ -25,7 +25,7 @@ fun HtmlRendererDefaultExample(html: String) {
 }
 
 @Composable
-fun HtmlRendererCustomExample(html: String) {
+fun HtmlTextRendererCustomExample(html: String) {
     val typography = HtmlStyleDefaults.typography()
     val spacing = HtmlStyleDefaults.spacing()
     val defaults = HtmlRenderers.defaults(
@@ -33,7 +33,7 @@ fun HtmlRendererCustomExample(html: String) {
         spacing = spacing,
     )
 
-    HtmlRenderer(
+    HtmlTextRenderer(
         html = html,
         typography = typography,
         spacing = spacing,

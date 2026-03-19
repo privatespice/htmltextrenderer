@@ -1,6 +1,6 @@
-## HtmlRenderer (Kotlin Multiplatform)
+## HtmlTextRenderer (Compose Multiplatform)
 
-`HtmlRenderer` is a lightweight Kotlin Multiplatform library for rendering a safe subset of HTML in Compose UI (Android + iOS).
+`HtmlTextRenderer` is a lightweight Compose Multiplatform library for rendering a safe subset of HTML in Compose UI (Android + iOS), built with Kotlin Multiplatform.
 
 It parses HTML into typed nodes, normalizes whitespace to browser-like behavior, and renders the result using Compose text and layout primitives.
 
@@ -19,7 +19,7 @@ It parses HTML into typed nodes, normalizes whitespace to browser-like behavior,
 ```kotlin
 @Composable
 fun Article(html: String) {
-    HtmlRenderer(
+    HtmlTextRenderer(
         html = html,
         onLinkClicked = { url ->
             // Handle URL click
@@ -29,7 +29,7 @@ fun Article(html: String) {
 }
 ```
 
-You can also customize typography, spacing, and per-node renderers (see `HtmlRendererExample.kt`).
+You can also customize typography, spacing, and per-node renderers (see `HtmlTextRendererExample.kt` and `HtmlTextRenderer(...)`).
 
 ## Supported tags
 
@@ -66,10 +66,3 @@ You can also customize typography, spacing, and per-node renderers (see `HtmlRen
 - You can limit allowed tags with the `supportedTags` parameter.
 - Default supported tags are defined in `HtmlNode.kt` as `DefaultSupportedTags`.
 
-## Build
-
-From project root:
-
-```bash
-./gradlew :htmlrenderer:check
-```

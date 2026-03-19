@@ -1,6 +1,16 @@
 package org.privatespice.htmlrenderer.parser
 
 import com.mohamedrejeb.ksoup.html.parser.KsoupHtmlHandler
+import org.privatespice.htmlrenderer.node.DefaultSupportedTags
+import org.privatespice.htmlrenderer.node.HtmlDocument
+import org.privatespice.htmlrenderer.node.HtmlInlineTag
+import org.privatespice.htmlrenderer.node.HtmlNodeMapper
+import org.privatespice.htmlrenderer.node.HtmlRawElementNode
+import org.privatespice.htmlrenderer.node.HtmlRawLineBreakNode
+import org.privatespice.htmlrenderer.node.HtmlRawNode
+import org.privatespice.htmlrenderer.node.HtmlRawTextNode
+import org.privatespice.htmlrenderer.node.HtmlTag
+import org.privatespice.htmlrenderer.node.htmlTagFromName
 import com.mohamedrejeb.ksoup.html.parser.KsoupHtmlParser as KsoupEngineParser
 
 internal class KsoupHtmlParser {

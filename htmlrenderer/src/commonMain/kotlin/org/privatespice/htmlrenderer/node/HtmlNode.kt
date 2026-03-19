@@ -1,4 +1,4 @@
-package org.privatespice.htmlrenderer.parser
+package org.privatespice.htmlrenderer.node
 
 sealed interface HtmlTag {
     val tagName: String

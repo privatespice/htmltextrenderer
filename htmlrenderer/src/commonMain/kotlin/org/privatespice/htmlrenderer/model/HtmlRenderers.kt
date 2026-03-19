@@ -16,12 +16,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import org.privatespice.htmlrenderer.HtmlAnnotatedText
 import org.privatespice.htmlrenderer.RenderList
-import org.privatespice.htmlrenderer.parser.HtmlBlockQuoteNode
-import org.privatespice.htmlrenderer.parser.HtmlHeadingNode
-import org.privatespice.htmlrenderer.parser.HtmlInlineNode
-import org.privatespice.htmlrenderer.parser.HtmlListNode
-import org.privatespice.htmlrenderer.parser.HtmlParagraphNode
-import org.privatespice.htmlrenderer.parser.HtmlTextAlign
+import org.privatespice.htmlrenderer.node.HtmlBlockQuoteNode
+import org.privatespice.htmlrenderer.node.HtmlHeadingNode
+import org.privatespice.htmlrenderer.node.HtmlInlineNode
+import org.privatespice.htmlrenderer.node.HtmlListNode
+import org.privatespice.htmlrenderer.node.HtmlParagraphNode
+import org.privatespice.htmlrenderer.node.HtmlTextAlign
+import org.privatespice.htmlrenderer.style.HtmlSpacing
+import org.privatespice.htmlrenderer.style.HtmlTypography
 
 data class HtmlRenderers(
     // Block renderers
@@ -30,7 +32,7 @@ data class HtmlRenderers(
     val blockQuoteRenderer: @Composable (HtmlBlockQuoteNode, HtmlRenderContext) -> Unit,
     val listRenderer: @Composable (HtmlListNode, HtmlRenderContext) -> Unit,
 
-    // Inline SpanStyles — used by the AnnotatedString builder inside HtmlRenderer
+    // Inline SpanStyles — used by the AnnotatedString builder inside HtmlTextRenderer
     val strongStyle: SpanStyle,
     val emphasisStyle: SpanStyle,
     val underlineStyle: SpanStyle,
