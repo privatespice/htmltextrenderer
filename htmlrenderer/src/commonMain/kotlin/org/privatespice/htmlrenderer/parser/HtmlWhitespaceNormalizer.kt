@@ -1,6 +1,7 @@
 package org.privatespice.htmlrenderer.parser
 
 private val whitespaceRegex = Regex("\\s+")
+private val repeatedSpacesRegex = Regex(" {2,}")
 
 internal fun HtmlDocument.normalizeWhitespace(): HtmlDocument =
     copy(children = children.map { it.normalizeBlockNode() })
@@ -27,16 +28,13 @@ private fun HtmlListItemNode.normalizeListItemNode(): HtmlListItemNode {
                 end++
             }
             val inlineRun = normalizedChildren.subList(start, end).map { it as HtmlInlineNode }
-            result.addAll(normalizeInlineSiblings(inlineRun, trimEdges = false))
+            result.addAll(normalizeInlineSiblings(inlineRun, trimEdges = true))
             index = end
         } else {
             result.add(node)
             index++
         }
     }
-
-    trimLeadingMixedWhitespace(result)
-    trimTrailingMixedWhitespace(result)
 
     return copy(children = result)
 }
@@ -47,7 +45,7 @@ private fun HtmlNode.normalizeMixedNode(): HtmlNode? = when (this) {
 }
 
 private fun HtmlInlineNode.normalizeInlineNode(): HtmlInlineNode? = when (this) {
-    is HtmlTextNode -> HtmlTextNode(collapseWhitespace(text))
+    is HtmlTextNode -> this
     HtmlLineBreakNode -> HtmlLineBreakNode
     is HtmlStrongNode -> copy(children = normalizeInlineSiblings(children, trimEdges = false)).ifHasChildren()
     is HtmlEmphasisNode -> copy(children = normalizeInlineSiblings(children, trimEdges = false)).ifHasChildren()
@@ -132,10 +130,10 @@ private fun appendTextNode(result: MutableList<HtmlInlineNode>, text: String) {
 
     val previous = result.lastOrNull()
     if (previous is HtmlTextNode) {
-        val merged = (previous.text + text).replace(Regex(" {2,}"), " ")
+        val merged = (previous.text + text).replace(repeatedSpacesRegex, " ")
         result[result.lastIndex] = HtmlTextNode(merged)
     } else {
-        result.add(HtmlTextNode(text.replace(Regex(" {2,}"), " ")))
+        result.add(HtmlTextNode(text.replace(repeatedSpacesRegex, " ")))
     }
 }
 
@@ -147,7 +145,7 @@ private fun mergeAdjacentTextNodes(nodes: List<HtmlInlineNode>): List<HtmlInline
         if (node is HtmlTextNode) {
             val previous = result.lastOrNull()
             if (previous is HtmlTextNode) {
-                result[result.lastIndex] = HtmlTextNode((previous.text + node.text).replace(Regex(" {2,}"), " "))
+                result[result.lastIndex] = HtmlTextNode((previous.text + node.text).replace(repeatedSpacesRegex, " "))
             } else {
                 result.add(node)
             }
@@ -176,33 +174,6 @@ private fun trimInlineEdges(nodes: List<HtmlInlineNode>): List<HtmlInlineNode> {
     }
 
     return result
-}
-
-private fun trimLeadingMixedWhitespace(nodes: MutableList<HtmlNode>) {
-    while (nodes.firstOrNull() is HtmlTextNode) {
-        val first = nodes.first() as HtmlTextNode
-        val trimmed = first.text.trimStart()
-        if (trimmed.isEmpty()) {
-            nodes.removeAt(0)
-            continue
-        }
-        nodes[0] = HtmlTextNode(trimmed)
-        break
-    }
-}
-
-private fun trimTrailingMixedWhitespace(nodes: MutableList<HtmlNode>) {
-    while (nodes.lastOrNull() is HtmlTextNode) {
-        val lastIndex = nodes.lastIndex
-        val last = nodes[lastIndex] as HtmlTextNode
-        val trimmed = last.text.trimEnd()
-        if (trimmed.isEmpty()) {
-            nodes.removeAt(lastIndex)
-            continue
-        }
-        nodes[lastIndex] = HtmlTextNode(trimmed)
-        break
-    }
 }
 
 private fun hasTextualContentOnLeft(nodes: List<HtmlInlineNode>, index: Int): Boolean {
