@@ -8,6 +8,9 @@ plugins {
     id 'maven-publish'
 }
 
+group = "com.github.privatespice.htmltextrenderer"
+version = (System.getenv("VERSION") ?: findProperty("VERSION_NAME") ?: "local-SNAPSHOT").toString()
+
 kotlin {
     androidTarget {
         compilerOptions {
