@@ -31,23 +31,6 @@ fun Article(html: String) {
 
 You can also customize typography, spacing, and per-node renderers (see `HtmlRendererExample.kt` and `HtmlTextRenderer(...)`).
 
-## Installation (JitPack)
-
-Add JitPack to your repositories:
-
-```kotlin
-repositories {
-    maven("https://jitpack.io")
-}
-```
-
-Use only the text renderer module artifact:
-
-```kotlin
-implementation("com.github.privatespice.htmltextrenderer:htmlrenderer:<tag>")
-```
-
-Replace `<tag>` with a Git tag or commit hash.
 
 ## Supported tags
 
