@@ -44,7 +44,7 @@ repositories {
 Use only the text renderer module artifact:
 
 ```kotlin
-implementation("com.github.privatespice.htmlrenderer:htmlrenderer:<tag>")
+implementation("com.github.privatespice.htmltextrenderer:htmlrenderer:<tag>")
 ```
 
 Replace `<tag>` with a Git tag or commit hash.
